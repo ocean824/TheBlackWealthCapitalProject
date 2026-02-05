@@ -10,8 +10,16 @@ A comprehensive trading strategies documentation repository for **Market Cipher*
 3. [Architecture](#architecture-overview)
 4. [TL;DR Quick Start](#tldr-quick-start)
 
+### 🎯 Signal Scoring System (NEW)
+5. [**Confluence Scoring System**](docs/scoring/confluence-scoring-system.md) - Unified scoring framework for all signals
+   - Market Cipher scores (Green Dots +35, Blood Diamond -50, DBSI scoring)
+   - AlgoPro scores with timeframe multipliers
+   - Quant validation factors (Monte Carlo, Kelly Criterion)
+   - Risk & liquidation modifiers
+   - Entry thresholds (100+ = Strong, 75+ = Good, <40 = No Trade)
+
 ### Market Cipher
-5. [Market Cipher Documentation](#market-cipher-documentation)
+6. [Market Cipher Documentation](#market-cipher-documentation)
    - [Overview](docs/market-cipher/overview.md)
    - [Signals & Indicators](docs/market-cipher/signals.md) - Green dots, yellow X's, blood diamonds, momentum phases, liquidation points
    - [Trading Strategies](docs/market-cipher/strategies.md)
