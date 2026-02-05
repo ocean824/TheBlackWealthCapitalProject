@@ -1,0 +1,126 @@
+{
+  "strategy_name": "AlgoPro QuantX Futures",
+  "version": "1.0.0",
+  "description": "Confluence-based futures trading strategy using AlgoPro QuantX. Optimized for NQ and ES with strict risk management.",
+  "author": "The Black Wealth Capital Project",
+  "created_at": "2025-02-04T00:00:00Z",
+  "updated_at": "2025-02-04T00:00:00Z",
+  "markets": ["NQ", "ES", "MNQ", "MES"],
+  "timeframes": ["5m", "15m", "1h"],
+  "indicators": {
+    "market_cipher": {
+      "enabled": false,
+      "version": "B"
+    },
+    "algopro": {
+      "enabled": true,
+      "tools": ["quantx", "market_matrix"]
+    }
+  },
+  "entry_rules": {
+    "long": {
+      "enabled": true,
+      "required_signals": ["quantx_long"],
+      "confluence_minimum": 5,
+      "confluence_signals": [
+        "divergence_bullish",
+        "fvg_below",
+        "vwap_extended_below",
+        "volume_exhaustion_selling",
+        "williams_oversold",
+        "sfp_bullish",
+        "stochastic_oversold",
+        "liquidity_grab_bullish",
+        "price_exhaustion_bullish",
+        "fear_extreme",
+        "mean_reversion_below",
+        "kde_rsi_oversold",
+        "dying_momentum_bearish"
+      ],
+      "confirmation": "breakout",
+      "entry_type": "market"
+    },
+    "short": {
+      "enabled": true,
+      "required_signals": ["quantx_short"],
+      "confluence_minimum": 5,
+      "confluence_signals": [
+        "divergence_bearish",
+        "fvg_above",
+        "vwap_extended_above",
+        "volume_exhaustion_buying",
+        "williams_overbought",
+        "sfp_bearish",
+        "stochastic_overbought",
+        "liquidity_grab_bearish",
+        "price_exhaustion_bearish",
+        "greed_extreme",
+        "mean_reversion_above",
+        "kde_rsi_overbought",
+        "dying_momentum_bullish"
+      ],
+      "confirmation": "breakout",
+      "entry_type": "market"
+    }
+  },
+  "exit_rules": {
+    "take_profit": {
+      "type": "risk_reward",
+      "value": 2.5
+    },
+    "stop_loss": {
+      "type": "atr_multiple",
+      "value": 1.5,
+      "buffer_percent": 0.5
+    },
+    "trailing_stop": {
+      "enabled": true,
+      "activation_rr": 1.0,
+      "trail_type": "atr",
+      "trail_value": 1.0
+    },
+    "time_exit": {
+      "enabled": true,
+      "session_end": true
+    }
+  },
+  "risk_management": {
+    "max_risk_per_trade": 1.5,
+    "max_daily_loss": 5.0,
+    "max_open_trades": 2,
+    "position_sizing": "fixed_risk",
+    "correlation_limit": 0.7
+  },
+  "filters": {
+    "session_filter": {
+      "enabled": true,
+      "sessions": [
+        {
+          "name": "US Regular Hours",
+          "start": "09:30",
+          "end": "16:00",
+          "timezone": "America/New_York"
+        }
+      ]
+    },
+    "volatility_filter": {
+      "enabled": true,
+      "min_atr": 5,
+      "max_atr": 100
+    },
+    "trend_filter": {
+      "enabled": true,
+      "indicator": "htf_ltf_bias",
+      "settings": {
+        "require_alignment": true
+      }
+    }
+  },
+  "notifications": {
+    "on_signal": true,
+    "on_entry": true,
+    "on_exit": true,
+    "on_stop_loss": true,
+    "channels": ["webhook", "telegram"]
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theblackwealthcapitalproject.com/strategy-schema.json",
+  "title": "Trading Strategy Schema",
+  "description": "Schema for defining trading strategies that agents can read and execute",
+  "type": "object",
+  "required": ["strategy_name", "version", "markets", "timeframes", "entry_rules", "exit_rules", "risk_management"],
+  "properties": {
+    "strategy_name": {
+      "type": "string",
+      "description": "Human-readable name for the strategy"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the strategy"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of the strategy"
+    },
+    "author": {
+      "type": "string",
+      "description": "Creator of the strategy"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the strategy was created"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the strategy was last updated"
+    },
+    "markets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of markets this strategy applies to",
+      "examples": [["BTC/USD", "ETH/USD", "NQ", "ES", "SPY"]]
+    },
+    "timeframes": {
+      "type": "array",
+      "items": { 
+        "type": "string",
+        "enum": ["1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "6h", "12h", "1d", "3d", "1w", "1M"]
+      },
+      "description": "Timeframes the strategy operates on"
+    },
+    "indicators": {
+      "type": "object",
+      "description": "Indicators required for this strategy",
+      "properties": {
+        "market_cipher": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "version": { "type": "string", "enum": ["A", "B", "both"] }
+          }
+        },
+        "algopro": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "tools": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["quantx", "v15", "market_matrix", "evox", "v3", "strategy_lab", "smart_money_concepts", "reversal_suite"]
+              }
+            }
+          }
+        },
+        "custom": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "settings": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    "entry_rules": {
+      "type": "object",
+      "properties": {
+        "long": { "$ref": "#/$defs/entry_condition" },
+        "short": { "$ref": "#/$defs/entry_condition" }
+      },
+      "description": "Rules for entering trades"
+    },
+    "exit_rules": {
+      "type": "object",
+      "properties": {
+        "take_profit": { "$ref": "#/$defs/exit_condition" },
+        "stop_loss": { "$ref": "#/$defs/exit_condition" },
+        "trailing_stop": { "$ref": "#/$defs/trailing_stop_condition" },
+        "time_exit": { "$ref": "#/$defs/time_exit_condition" }
+      },
+      "description": "Rules for exiting trades"
+    },
+    "risk_management": {
+      "type": "object",
+      "required": ["max_risk_per_trade"],
+      "properties": {
+        "max_risk_per_trade": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 10,
+          "description": "Maximum risk per trade as percentage of account"
+        },
+        "max_daily_loss": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 25,
+          "description": "Maximum daily loss as percentage of account"
+        },
+        "max_weekly_loss": {
+          "type": "number",
+          "description": "Maximum weekly loss as percentage of account"
+        },
+        "max_open_trades": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20,
+          "description": "Maximum number of concurrent open trades"
+        },
+        "position_sizing": {
+          "type": "string",
+          "enum": ["fixed_risk", "fixed_size", "kelly_criterion", "volatility_adjusted"],
+          "description": "Method for calculating position size"
+        },
+        "correlation_limit": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Maximum correlation allowed between open positions"
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "session_filter": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "sessions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "start": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" },
+                  "end": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" },
+                  "timezone": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "volatility_filter": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "min_atr": { "type": "number" },
+            "max_atr": { "type": "number" }
+          }
+        },
+        "trend_filter": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "indicator": { "type": "string" },
+            "settings": { "type": "object" }
+          }
+        }
+      }
+    },
+    "notifications": {
+      "type": "object",
+      "properties": {
+        "on_signal": { "type": "boolean" },
+        "on_entry": { "type": "boolean" },
+        "on_exit": { "type": "boolean" },
+        "on_stop_loss": { "type": "boolean" },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["webhook", "email", "telegram", "discord"]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "entry_condition": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "required_signals": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Signals that MUST be present for entry"
+        },
+        "confluence_minimum": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 15,
+          "description": "Minimum number of confluence signals required"
+        },
+        "confluence_signals": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of possible confluence signals"
+        },
+        "confirmation": {
+          "type": "string",
+          "enum": ["immediate", "candle_close", "next_candle", "breakout"],
+          "description": "When to confirm the entry"
+        },
+        "entry_type": {
+          "type": "string",
+          "enum": ["market", "limit", "stop"],
+          "description": "Order type for entry"
+        },
+        "limit_offset": {
+          "type": "number",
+          "description": "Offset from signal price for limit orders"
+        }
+      }
+    },
+    "exit_condition": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["risk_reward", "fixed_percent", "fixed_price", "atr_multiple", "swing_point", "indicator"],
+          "description": "Method for calculating exit level"
+        },
+        "value": {
+          "type": "number",
+          "description": "Value for the exit calculation"
+        },
+        "buffer_percent": {
+          "type": "number",
+          "description": "Buffer to add beyond the calculated level"
+        }
+      }
+    },
+    "trailing_stop_condition": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "activation_rr": {
+          "type": "number",
+          "description": "Risk/reward level at which trailing stop activates"
+        },
+        "trail_type": {
+          "type": "string",
+          "enum": ["percent", "atr", "swing", "breakeven"]
+        },
+        "trail_value": {
+          "type": "number",
+          "description": "Value for trailing calculation"
+        }
+      }
+    },
+    "time_exit_condition": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "max_bars": {
+          "type": "integer",
+          "description": "Maximum bars to hold position"
+        },
+        "session_end": {
+          "type": "boolean",
+          "description": "Exit at end of trading session"
+        },
+        "specific_time": {
+          "type": "string",
+          "pattern": "^\\d{2}:\\d{2}$",
+          "description": "Specific time to exit (HH:MM)"
+        }
+      }
+    }
+  }
+}
