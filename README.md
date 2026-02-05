@@ -4,16 +4,47 @@ A comprehensive trading strategies documentation repository for **Market Cipher*
 
 ## Table of Contents
 
+### Core Documentation
 1. [Overview](#overview)
-2. [Compliance & Legal](#compliance--legal)
-3. [Market Cipher Documentation](#market-cipher-documentation)
-4. [AlgoPro Documentation](#algopro-documentation)
-5. [Webhook Integration](#webhook-integration)
-6. [Ultimate JSON Schema](#ultimate-json-schema)
-7. [Strategy JSON Schema](#strategy-json-schema)
-8. [MCP Integration](#mcp-integration)
-9. [Agent Integration](#agent-integration)
-10. [TL;DR Quick Start](#tldr-quick-start)
+2. [Compliance & Legal](#compliance--legal) | [Full Doc](docs/COMPLIANCE.md)
+3. [Architecture](#architecture-overview)
+4. [TL;DR Quick Start](#tldr-quick-start)
+
+### Market Cipher
+5. [Market Cipher Documentation](#market-cipher-documentation)
+   - [Overview](docs/market-cipher/overview.md)
+   - [Signals & Indicators](docs/market-cipher/signals.md) - Green dots, yellow X's, blood diamonds, momentum phases, liquidation points
+   - [Trading Strategies](docs/market-cipher/strategies.md)
+
+### AlgoPro Suite
+6. [AlgoPro Documentation](#algopro-documentation)
+   - [Overview](docs/algopro/overview.md)
+   - [QuantX - Confluence Futures](docs/algopro/quantx.md)
+   - [Market Matrix - Fibonacci & Liquidity](docs/algopro/market-matrix.md)
+   - [Complete AlgoPro Guide](docs/algopro/complete-guide.md)
+
+### Quantitative Trading
+7. [Quant Trading Concepts](docs/quant-trading/concepts.md) - Kelly Criterion, ergodicity, Markov chains
+8. [Roman Paolucci & DeltaTrend](docs/quant-trading/roman-paolucci-deltatrend.md) - Data-driven trading, statistical validation
+9. [Jim Simons & Renaissance Strategies](docs/quant-trading/jim-simons-renaissance.md) - Black-Scholes, statistical arbitrage
+
+### Moon Dev Integration
+10. [Moon Dev Tools Overview](docs/moon-dev/integration.md)
+11. [Complete Integration Guide](docs/moon-dev/integration-guide.md) - AI agents, copy trading bots, data tools, backtesting
+
+### Implementation Guides
+12. [QuantPad-Style Features](docs/implementation/quantpad-features.md) - 5-step quant workflow, Monte Carlo, prop firm simulator
+13. [Free Data APIs](docs/implementation/data-apis.md) - CoinGecko, Binance, sentiment APIs
+
+### Video Notes & Research
+14. [All Videos Summary](docs/video-notes/all-videos-summary.md) - Key takeaways from 33+ analyzed videos
+
+### Strategy & Webhook Integration
+15. [Webhook Integration](#webhook-integration) | [Full Doc](webhook/endpoint.md)
+16. [Ultimate JSON Schema](#ultimate-json-schema) | [Full Doc](strategies/ultimate-json-schema.md)
+17. [Strategy JSON Schema](#strategy-json-schema)
+18. [MCP Integration](#mcp-integration) | [Full Doc](docs/MCP_INTEGRATION.md)
+19. [Agent Integration](#agent-integration) | [Full Doc](agent/integration.md)
 
 ---
 
