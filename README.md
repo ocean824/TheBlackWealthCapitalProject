@@ -5,12 +5,15 @@ A comprehensive trading strategies documentation repository for **Market Cipher*
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Market Cipher Documentation](#market-cipher-documentation)
-3. [AlgoPro Documentation](#algopro-documentation)
-4. [Webhook Integration](#webhook-integration)
-5. [Strategy JSON Schema](#strategy-json-schema)
-6. [Agent Integration](#agent-integration)
-7. [TL;DR Quick Start](#tldr-quick-start)
+2. [Compliance & Legal](#compliance--legal)
+3. [Market Cipher Documentation](#market-cipher-documentation)
+4. [AlgoPro Documentation](#algopro-documentation)
+5. [Webhook Integration](#webhook-integration)
+6. [Ultimate JSON Schema](#ultimate-json-schema)
+7. [Strategy JSON Schema](#strategy-json-schema)
+8. [MCP Integration](#mcp-integration)
+9. [Agent Integration](#agent-integration)
+10. [TL;DR Quick Start](#tldr-quick-start)
 
 ---
 
@@ -38,6 +41,67 @@ This repository serves as a centralized knowledge base for trading strategies us
                             │   (JSON Storage)     │     │   (Chart Drawing)   │
                             └──────────────────────┘     └─────────────────────┘
 ```
+
+---
+
+## Compliance & Legal
+
+**IMPORTANT:** This project is designed to stay 100% compliant with TradingView's Terms of Service.
+
+### Approved Methods (What We Use)
+
+| Method | Description | Compliance |
+|--------|-------------|------------|
+| **Webhook Alerts** | Official TradingView feature | ✅ Fully Compliant |
+| **Licensed Charting Library** | Embed charts in your own app | ✅ Fully Compliant |
+| **Broker API** | Execute trades via your broker | ✅ Fully Compliant |
+
+### Prohibited Methods (What We Avoid)
+
+| Method | Why It's Banned | Risk |
+|--------|-----------------|------|
+| Scraping chart data | Violates ToS | Account Ban |
+| Automating the web UI | Bot detection | Account Ban |
+| Extracting indicator values via DOM | Reverse engineering | Legal Action |
+| Using unofficial APIs | ToS violation | Account Ban |
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    YOUR TRADINGVIEW ACCOUNT                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │ Market Cipher│  │   AlgoPro    │  │ Your Custom  │           │
+│  │  Indicators  │  │  Indicators  │  │  Indicators  │           │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘           │
+│         └────────────┬────┴─────────────────┘                    │
+│                      ▼                                           │
+│              ┌──────────────┐                                    │
+│              │   Webhook    │  ◄── Official TradingView Feature  │
+│              │    Alert     │                                    │
+│              └──────┬───────┘                                    │
+└─────────────────────┼────────────────────────────────────────────┘
+                      │ HTTPS POST (JSON)
+                      ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    YOUR MANUS DASHBOARD                          │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │   Webhook    │  │    Agent     │  │   Datafeed   │           │
+│  │   Receiver   │──▶│   Analysis   │──▶│   Charts     │           │
+│  └──────────────┘  └──────┬───────┘  └──────────────┘           │
+│                           ▼                                      │
+│              ┌──────────────────────┐                            │
+│              │    Broker API        │                            │
+│              │  - Execute Trades    │                            │
+│              │  - Monitor Positions │                            │
+│              │  - Manage TP/SL      │                            │
+│              └──────────────────────┘                            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The Golden Rule:** All data flows FROM TradingView TO your system via official webhooks. You never scrape, automate, or extract data from TradingView's interface.
+
+For full compliance documentation, see [docs/COMPLIANCE.md](docs/COMPLIANCE.md).
 
 ---
 
@@ -236,6 +300,80 @@ Response: { "status": "received", "signal_id": "uuid" }
 
 ---
 
+## Ultimate JSON Schema
+
+The **Ultimate JSON** is a unified webhook payload format that supports all trading operations through a single endpoint.
+
+### Core Principles
+
+1. **One Endpoint:** `https://your-domain.com/api/signals/receive`
+2. **One JSON Schema:** Different actions via `"event": "ENTRY" | "EXIT" | "UPDATE" | "CANCEL"`
+3. **Idempotency:** Every signal carries a unique `idempotency_key` to prevent duplicate trades
+
+### Event Types
+
+| Event | Purpose | When to Use |
+|-------|---------|-------------|
+| `ENTRY` | Open new position | Confluence score passes threshold |
+| `UPDATE` | Modify SL/TP/Trail | Trade is live, need to adjust |
+| `EXIT` | Close position | Exit condition triggers |
+| `CANCEL` | Cancel pending order | Order no longer valid |
+| `HEARTBEAT` | Keep-alive signal | System health check |
+
+### Example ENTRY Payload
+
+```json
+{
+  "v": "1.0",
+  "source": "tradingview",
+  "secret": "YOUR_SECRET",
+  "strategy": {
+    "strategy_id": "OMNI_001",
+    "signal_id": "LONG_A1",
+    "name": "Ø-MASTER-CONFLUENCE"
+  },
+  "market": {
+    "symbol": "{{exchange}}:{{ticker}}",
+    "tf": "5"
+  },
+  "event": "ENTRY",
+  "side": "BUY",
+  "intent": "OPEN",
+  "execution": {
+    "order_type": "MARKET",
+    "idempotency_key": "{{ticker}}_{{interval}}_{{time}}_LONG_A1"
+  },
+  "risk": {
+    "risk_model": "RISK_PERCENT",
+    "risk_percent": 0.5,
+    "max_open_positions": 1
+  },
+  "bracket": {
+    "sl": { "model": "STRUCTURE" },
+    "tp": { "model": "RR", "rr": 2.0 },
+    "trail": {
+      "enabled": true,
+      "model": "ATR",
+      "atr_len": 14,
+      "atr_mult": 1.5
+    }
+  },
+  "confluence": {
+    "score": 85,
+    "threshold": 70,
+    "signals": {
+      "trend": "UP",
+      "momentum": "BULLISH",
+      "structure": "SUPPORT"
+    }
+  }
+}
+```
+
+For the complete schema and all event types, see [strategies/ultimate-json-schema.md](strategies/ultimate-json-schema.md).
+
+---
+
 ## Strategy JSON Schema
 
 Define your trading strategies in a structured JSON format that agents can read and execute.
@@ -340,6 +478,48 @@ Define your trading strategies in a structured JSON format that agents can read 
   }
 }
 ```
+
+---
+
+## MCP Integration
+
+Model Context Protocol (MCP) servers can extend AI capabilities for market analysis.
+
+### Available MCP Servers
+
+| Server | Purpose | Compliance |
+|--------|---------|------------|
+| `tradingview-mcp` | Market screening, technical analysis | ⚠️ Caution |
+| `tradingview-chart-mcp` | Chart image scraping | ❌ Not Recommended |
+
+### Recommended Approach
+
+Instead of relying on MCP servers that may violate ToS, use the compliant webhook-based integration:
+
+1. **Set up webhook endpoint** in your Manus app
+2. **Create TradingView alert** with webhook URL
+3. **Configure JSON payload** using the Ultimate JSON Schema
+4. **Process signals** in your backend
+5. **Display on your charts** using licensed Charting Library
+
+### Using tradingview-mcp for Research
+
+The `tradingview-mcp` server can be useful for market research and idea generation:
+
+```bash
+# List available tools
+manus-mcp-cli tool list --server tradingview-mcp
+
+# Get top gainers
+manus-mcp-cli tool call top_gainers --server tradingview-mcp --input '{"exchange": "BINANCE", "limit": 10}'
+
+# Analyze a specific coin
+manus-mcp-cli tool call coin_analysis --server tradingview-mcp --input '{"symbol": "BTCUSDT"}'
+```
+
+**Important:** Use MCP servers only for research. For production trading, always use official webhook alerts.
+
+For full MCP documentation, see [docs/MCP_INTEGRATION.md](docs/MCP_INTEGRATION.md).
 
 ---
 
