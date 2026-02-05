@@ -146,52 +146,89 @@ Market Cipher is a premium TradingView indicator suite created by Crypto Face. I
 
 | Component | Description | Key Signals |
 |-----------|-------------|-------------|
-| **Money Flow** | Measures buying/selling pressure | Green = bullish, Red = bearish |
-| **VWAP Bands** | Volume-weighted price levels | Deviation from mean indicates extremes |
-| **Momentum Waves** | Multi-timeframe momentum oscillator | Wave crosses, divergences |
-| **DBSI (Dollar Buy/Sell Index)** | Institutional money flow | Large green/red bars = institutional activity |
+| **Blue Momentum Waves** | Primary trend indicator | Light→Dark blue = trend change, Above/below zero = direction |
+| **Money Flow Wave** | Institutional money movement | Green = money IN, Red = money OUT, Smooth = tradeable |
+| **VWAP (Yellow Waves)** | Volume-weighted oscillator | Below blue = bullish, Above blue = bearish |
+| **RSI Indicators** | Momentum strength | Green & tight = bullish, Red & spreading = bearish |
+| **DBSI (-5 to +31)** | 36 momentum indicators combined | 14+ = strong signal, Entry when high vs low opposite |
 
 ### Key Signals & Patterns
 
-#### 1. Blue Dots (Strong Buy Signal)
-- Appears when multiple bullish conditions align
-- Requires: Oversold RSI + Bullish divergence + Money flow reversal
-- **Entry**: At or near the blue dot
-- **Stop Loss**: Below recent swing low
+#### 1. Green Dots (THE Most Important Bullish Signal)
+- Appears on **oversold cross-up** of momentum waves
+- Requires: Blue waves showing **higher low with GAP** between waves
+- Price must ALSO make higher low to confirm
+- **Best Setup**: Deep anchor wave + trigger wave + green dot + smooth money flow
+- **Entry**: At green dot with price above 200 EMA (from DBSI)
+- **Stop Loss**: Below anchor wave low or Market Cipher SR support
 
-#### 2. Red X (Strong Sell Signal)
-- Appears when multiple bearish conditions align
-- Requires: Overbought RSI + Bearish divergence + Money flow reversal
-- **Entry**: At or near the red X
-- **Stop Loss**: Above recent swing high
+#### 2. Yellow X (Whale Manipulation Warning)
+- **CRITICAL SIGNAL** - Indicates whale manipulation or strong exit warning
+- At resistance = whales selling/distributing
+- After rally = take profit warning
+- Near liquidation zones = manipulation to trigger stops
+- **Action**: Exit longs, do NOT enter new positions
 
-#### 3. Momentum Wave Divergences
-- **Bullish Divergence**: Price makes lower low, waves make higher low
-- **Bearish Divergence**: Price makes higher high, waves make lower high
-- High probability reversal signals when combined with other confluence
+#### 3. Blood Diamond (THE Harshest Bearish Warning)
+- **THE most bearish signal in Market Cipher**
+- Red diamond shape = immediately exit ALL longs
+- After extended rally = high probability reversal
+- With other bearish signals = very strong short setup
+- **Action**: Exit longs IMMEDIATELY, consider shorts
 
-#### 4. Money Flow Reversals
-- Green to red transition = potential short opportunity
-- Red to green transition = potential long opportunity
-- Most powerful when occurring at key support/resistance levels
+#### 4. Red X (Hard Warning)
+- Strong bearish signal indicating downward pressure
+- Exit longs, consider shorts when combined with other signals
+
+#### 5. DBSI Scoring System
+- **200 EMA Color**: Green = ONLY longs, Red = ONLY shorts
+- **Entry Signal**: Large number (14+) vs low negative (-2 to -5) on opposite
+- **Exit Signal**: Strong signal weakening (27→8) while opposite increases
+
+#### 6. Anchor & Trigger Wave Strategy
+- **Anchor Wave**: First deep wave establishing momentum - should be "fat and deep"
+- **Trigger Wave**: Smaller confirmation wave following anchor
+- **Entry**: When trigger wave confirms with light→dark blue transition
+- **Money Flow Rule**: "Enter in the red, exit in the green"
+
+### Momentum Phases
+
+| Phase | Characteristics | Trading Approach |
+|-------|-----------------|------------------|
+| **Early** | Light blue forming, money flow curving, RSI weak | Higher risk, smaller size, wider stops |
+| **Mid** | Dark blue established, money flow thick, RSI green & tight | OPTIMAL entry zone, standard size |
+| **Late** | Waves at extremes, warning symbols appearing | Take profits, trail stops, NO new entries |
+
+### Strongest Signals
+
+| Signal Combo | Strength | Action |
+|--------------|----------|--------|
+| Green Dot + Deep Anchor + Smooth Money Flow | **STRONGEST BULLISH** | Enter long with confidence |
+| Blood Diamond + Yellow X | **STRONGEST BEARISH** | Exit longs IMMEDIATELY |
+| Multi-TF Green Dot Confluence | HIGH BULLISH | Scale into position |
+| DBSI 14+ with -5 opposite | STRONG | Enter in direction of strong score |
+| Choppy Money Flow | AVOID | No trade |
 
 ### Trading Strategies
 
 #### Basic Strategy (Beginner)
-1. Wait for blue dot OR red X signal
-2. Confirm with money flow direction
-3. Enter on confirmation candle close
-4. Set stop loss at recent swing point
-5. Take profit at 2:1 risk/reward minimum
+1. Wait for **green dot** signal (NOT blue dot)
+2. Confirm price above 200 EMA (DBSI green)
+3. Confirm money flow smooth and curving up
+4. Enter on confirmation candle close
+5. Stop loss at Market Cipher SR support
+6. Take profit at 2:1 risk/reward minimum
 
 #### Advanced Strategy (Confluence)
 1. Identify key support/resistance zones
-2. Wait for price to reach zone
-3. Look for divergence on momentum waves
-4. Confirm with money flow reversal
-5. Wait for blue dot/red X confirmation
-6. Enter with tight stop loss
-7. Scale out at 2:1, 3:1, 4:1 R:R levels
+2. Wait for deep **anchor wave** to form
+3. Look for **trigger wave** with light→dark blue transition
+4. Confirm **green dot** appearing with gap between waves
+5. Confirm money flow smooth (not choppy)
+6. Check NO warning symbols (Yellow X, Blood Diamond)
+7. Verify higher timeframe alignment
+8. Enter with stop at anchor wave low
+9. Scale out at 2:1, 3:1, 4:1 R:R levels
 
 ---
 
