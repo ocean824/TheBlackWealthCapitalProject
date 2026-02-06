@@ -43,16 +43,17 @@ A comprehensive trading strategies documentation repository for **Market Cipher*
 ### Implementation Guides
 12. [QuantPad-Style Features](docs/implementation/quantpad-features.md) - 5-step quant workflow, Monte Carlo, prop firm simulator
 13. [Free Data APIs](docs/implementation/data-apis.md) - CoinGecko, Binance, sentiment APIs
+14. [**Lightweight Charts Integration**](docs/implementation/lightweight-charts-integration.md) - FREE charting library with 70+ indicators
 
 ### Video Notes & Research
-14. [All Videos Summary](docs/video-notes/all-videos-summary.md) - Key takeaways from 33+ analyzed videos
+15. [All Videos Summary](docs/video-notes/all-videos-summary.md) - Key takeaways from 33+ analyzed videos
 
 ### Strategy & Webhook Integration
-15. [Webhook Integration](#webhook-integration) | [Full Doc](webhook/endpoint.md)
-16. [Ultimate JSON Schema](#ultimate-json-schema) | [Full Doc](strategies/ultimate-json-schema.md)
-17. [Strategy JSON Schema](#strategy-json-schema)
-18. [MCP Integration](#mcp-integration) | [Full Doc](docs/MCP_INTEGRATION.md)
-19. [Agent Integration](#agent-integration) | [Full Doc](agent/integration.md)
+16. [Webhook Integration](#webhook-integration) | [Full Doc](webhook/endpoint.md)
+17. [Ultimate JSON Schema](#ultimate-json-schema) | [Full Doc](strategies/ultimate-json-schema.md)
+18. [Strategy JSON Schema](#strategy-json-schema)
+19. [MCP Integration](#mcp-integration) | [Full Doc](docs/MCP_INTEGRATION.md)
+20. [Agent Integration](#agent-integration) | [Full Doc](agent/integration.md)
 
 ---
 
