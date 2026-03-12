@@ -48,12 +48,21 @@ A comprehensive trading strategies documentation repository for **Market Cipher*
 ### Video Notes & Research
 15. [All Videos Summary](docs/video-notes/all-videos-summary.md) - Key takeaways from 33+ analyzed videos
 
+### Omega System (AI Agent Architecture Research)
+16. [**Omega System — Rough Architecture**](omega-system-rough/README.md) - Comprehensive AI agent architecture research
+    - [Architecture Overview](omega-system-rough/docs/architecture-overview.md) - Comparative analysis of OpenClaw, Manus, Runner H, Vy
+    - [Security Guardrails](omega-system-rough/security/guardrails-framework.md) - 5-layer defense-in-depth framework
+    - [Agent Design Patterns](omega-system-rough/docs/agent-design-patterns.md) - 12 patterns from 14+ AI platforms
+    - [Prompt Taxonomy](omega-system-rough/docs/prompt-taxonomy.md) - 123 system prompts analyzed
+    - [OpenClaw Vulnerabilities](omega-system-rough/security/openclaw-vulnerabilities.md) - CrowdStrike, Cisco, Snyk findings
+    - Raw system prompts from Anthropic, OpenAI, Google, xAI, Meta, Manus, Cursor, Windsurf, v0, Lovable, Devin
+
 ### Strategy & Webhook Integration
-16. [Webhook Integration](#webhook-integration) | [Full Doc](webhook/endpoint.md)
-17. [Ultimate JSON Schema](#ultimate-json-schema) | [Full Doc](strategies/ultimate-json-schema.md)
-18. [Strategy JSON Schema](#strategy-json-schema)
-19. [MCP Integration](#mcp-integration) | [Full Doc](docs/MCP_INTEGRATION.md)
-20. [Agent Integration](#agent-integration) | [Full Doc](agent/integration.md)
+17. [Webhook Integration](#webhook-integration) | [Full Doc](webhook/endpoint.md)
+18. [Ultimate JSON Schema](#ultimate-json-schema) | [Full Doc](strategies/ultimate-json-schema.md)
+19. [Strategy JSON Schema](#strategy-json-schema)
+20. [MCP Integration](#mcp-integration) | [Full Doc](docs/MCP_INTEGRATION.md)
+21. [Agent Integration](#agent-integration) | [Full Doc](agent/integration.md)
 
 ---
 
